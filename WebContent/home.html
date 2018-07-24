@@ -127,16 +127,17 @@
         <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>Email:&nbsp&nbsp&nbsp&nbsp&nbspcare@fourseasonsretail.in<br>
       </div>
       <p>Swing by for a cup of <i class="fa fa-coffee"></i>, or leave me a note:</p>
-      <form action="/action_page.html" target="_blank">
+      <form action="/send_msg.html" target="_blank">
         <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
           <div class="w3-half">
-            <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+            <input class="w3-input w3-border" type="text" name="name" placeholder="Name" required name="Name">
           </div>
           <div class="w3-half">
-            <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+            <input class="w3-input w3-border" type="text" placeholder="Email" name="email"
+            pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"  required name="Email">
           </div>
         </div>
-        <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+        <input class="w3-input w3-border" type="text" placeholder="Message" name="msg" required name="Message">
         <button class="w3-button w3-black w3-right w3-section" type="submit">
           <i class="fa fa-paper-plane"></i> SEND MESSAGE
         </button>
@@ -166,7 +167,8 @@
 
     <div class="container">
       <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+      <input type="text" placeholder="Enter Username" 
+       pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" name="uname" required>
 
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
@@ -197,7 +199,8 @@
 
     <div class="container">
       <label for="uname"><b>Username</b></label>
-      <input type="text" style="height:50px;" placeholder="Enter email" name="u_name" required>
+      <input type="text" style="height:50px;" 
+      pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" placeholder="Enter email" name="u_name" required>
 
       <label for="psw"><b>Password</b></label>
       <input type="password" style="height:50px;" placeholder="Enter Password" name="u_psw" required>
@@ -206,7 +209,7 @@
       <input type="password" style="height:50px;" placeholder="Re-enter Password" name="r_psw" required>
       
       <label for="mail"><b>Email</b></label>
-      <input type="text" style="height:50px;" placeholder="Please enter e-mail id" name="u_email" required>
+      <input type="text" style="height:50px;" placeholder="Please enter e-mail id" pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*"  name="u_email" required>
       
       <label for="phone"><b>Phone</b></label>
       <input type="text" style="height:50px;" placeholder="Please enter 10 digit mobile number" name="u_mob" required>
@@ -230,9 +233,7 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-    
 }
 </script>
-
 </body>
 </html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee-3.1.xsd">
+
+	<!-- CAUTION!!! For development environment - for unit testing only -->
+	<!-- <bean id="grsDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
+		p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}" p:username="${jdbc.username}" 
+		p:password="${jdbc.password}" /> -->
+
+	<!-- Application server datasource configuration -->
+
+	<!-- <connection-property name="includeSynonyms"> true </connection-property> -->
+
+	<bean name="grsDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		p:driverClassName="oracle.jdbc.driver.OracleDriver"
+		p:url="jdbc:oracle:thin:@(DESCRIPTION =(enable = broken)(ADDRESS = (PROTOCOL = TCP)(HOST = gcu13303.austin.hp.com)(PORT = 1526))(CONNECT_DATA =(SERVICE_NAME = BDDBI)))"
+		p:username="grs" p:password="6qazwsx_7777" />
+	<bean id="grsSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="grsDataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>queries.hbm.xml</value>
+			</list>
+		</property>
+		<property name="packagesToScan" value="com.hp.autobot.model.grs.database.entities" />
+
+
+
+		<property name="hibernateProperties">
+			<props>
+
+
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.jdbc.batch_size">1000</prop>
+				<prop key="hibernate.order_inserts">true</prop>
+				<prop key="hibernate.order_updates">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				<prop key="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext
+				</prop>
+			</props>
+		</property>
+
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+		p:sessionFactory-ref="grsSessionFactory" p:nestedTransactionAllowed="true" />
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="grsSessionFactory" />
+	</bean>
+
+</beans>
